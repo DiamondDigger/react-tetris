@@ -61,7 +61,7 @@ export const tetrominos = {
     }
 }
 
-export function createTetramino() {
+export function createTetromino() {
     const shapesOfTetrominos = 'IJLOTSZ'
     const randomTetromino = () =>
         Math.floor(Math.random() * shapesOfTetrominos.length)
