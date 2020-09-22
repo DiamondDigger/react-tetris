@@ -5,11 +5,13 @@ import Cell from './Cell'
 import Display from './Display'
 import StartButton from './StartButton'
 
+import {createStage} from '../gameHelpers'
+
 function Tetris() {
 
     return (
         <div>
-            <Stage/>
+            <Stage stage={createStage()}/>
             <aside>
                 <div>
                     <Display text='Score'/>
