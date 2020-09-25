@@ -6,15 +6,19 @@ import Cell from './Cell'
 import Display from './Display'
 import StartButton from './StartButton'
 
-import {createStage} from '../gameHelpers'
+import {useStage} from '../hooks/useStage'
+import {usePlayer} from "../hooks/usePlayer";
 import {StyledTetrisWrapper, StyledTetris} from './styles/StyledTetris'
 
 function Tetris() {
+    const [stage, setStage] = useStage()
+    const [player] = usePlayer()
 
+    console.log('re-render')
     return (
         <StyledTetrisWrapper>
             <StyledTetris>
-                <Stage stage={createStage()}/>
+                <Stage stage={stage}/>
                 <aside>
                     <div>
                         <Display text='Score'/>
