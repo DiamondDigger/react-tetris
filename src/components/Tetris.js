@@ -1,4 +1,5 @@
 import React from "react";
+import '../index.css'
 
 import Stage from './Stage'
 import Cell from './Cell'
