@@ -1,14 +1,18 @@
 import React, {useState} from "react";
 import '../index.css'
 
+//Components
 import Stage from './Stage'
 import Cell from './Cell'
 import Display from './Display'
 import StartButton from './StartButton'
 
+//Styled Components
+import {StyledTetrisWrapper, StyledTetris} from './styles/StyledTetris'
+
+//Hooks
 import {useStage} from '../hooks/useStage'
 import {usePlayer} from "../hooks/usePlayer";
-import {StyledTetrisWrapper, StyledTetris} from './styles/StyledTetris'
 
 function Tetris() {
     const [dropTime, setDropTime] = useState(null);
@@ -16,6 +20,26 @@ function Tetris() {
 
     const [player] = usePlayer()
     const [stage, setStage] = useStage(player)
+
+    const startGame = () => {
+
+    }
+
+    const move = () => {
+
+    }
+
+    const drop = () => {
+
+    }
+
+    const dropPlayer = () => {
+
+    }
+
+    const movePlayer = () => {
+
+    }
 
     console.log('re-render')
     return (
