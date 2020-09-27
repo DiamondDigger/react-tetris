@@ -25,8 +25,18 @@ function Tetris() {
 
     }
 
-    const move = () => {
-
+    const move = ({keyCode}) => {
+        if (!gameOver) {
+            if (keyCode === '37') { // left arrow
+                movePlayer(-1)
+            }
+            if (keyCode === '39') { // right arrow
+                movePlayer(1)
+            }
+            if (keyCode === '40') { // down
+                dropPlayer()
+            }
+        }
     }
 
     const drop = () => {
@@ -43,7 +53,7 @@ function Tetris() {
 
     console.log('re-render')
     return (
-        <StyledTetrisWrapper>
+        <StyledTetrisWrapper role='button' onKeyTap={e => move(e)}>
             <StyledTetris>
                 <Stage stage={stage}/>
                 <aside>
