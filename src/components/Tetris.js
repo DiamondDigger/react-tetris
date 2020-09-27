@@ -13,6 +13,7 @@ import {StyledTetrisWrapper, StyledTetris} from './styles/StyledTetris'
 //Hooks
 import {useStage} from '../hooks/useStage'
 import {usePlayer} from "../hooks/usePlayer";
+import {createStage} from "../gameHelpers";
 
 function Tetris() {
     const [dropTime, setDropTime] = useState(null);
@@ -22,7 +23,9 @@ function Tetris() {
     const [stage, setStage] = useStage(player)
 
     const startGame = () => {
-
+        //reset everything
+        setStage(createStage())
+        resetPlayer()
     }
 
     const move = ({keyCode}) => {
@@ -40,15 +43,15 @@ function Tetris() {
     }
 
     const drop = () => {
-
+        updatePlayerPos({x: 0, y: 1, collided: false})
     }
 
     const dropPlayer = () => {
-
+        drop()
     }
 
-    const movePlayer = () => {
-
+    const movePlayer = (direction) => {
+        updatePlayerPos({x: direction, y: 0})
     }
 
     console.log('re-render')
@@ -69,7 +72,7 @@ function Tetris() {
                             </div>
                         )
                     }
-                    <StartButton/>
+                    <StartButton onClick={startGame}/>
                 </aside>
             </StyledTetris>
         </StyledTetrisWrapper>
