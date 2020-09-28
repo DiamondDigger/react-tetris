@@ -19,7 +19,7 @@ function Tetris() {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(true)
 
-    const [player] = usePlayer()
+    const [player, updatePlayerPos, resetPlayer] = usePlayer()
     const [stage, setStage] = useStage(player)
 
     const startGame = () => {
