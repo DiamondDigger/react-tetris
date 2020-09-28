@@ -14,6 +14,7 @@ import {StyledTetrisWrapper, StyledTetris} from './styles/StyledTetris'
 import {useStage} from '../hooks/useStage'
 import {usePlayer} from "../hooks/usePlayer";
 import {createStage} from "../gameHelpers";
+import {createTetromino} from "../tetrominos";
 
 function Tetris() {
     const [dropTime, setDropTime] = useState(null);
