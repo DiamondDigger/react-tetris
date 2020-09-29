@@ -10,6 +10,8 @@ export function usePlayer() {
         collided: false
     })
 
+    console.log('player have been created', player.tetromino)
+
     const updatePlayerPos = ({x, y, collided}) => {
         setPlayer(prev => ({
             ...prev,
