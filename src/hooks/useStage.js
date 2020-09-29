@@ -7,16 +7,16 @@ export function useStage(player, setPlayer) {
 
     useEffect(() => {
         const updateStage = (prevStage) => {
-            //flush previous stage
+            // First flush the stage
             const newStage = prevStage => prevStage.map(row =>
                 row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)))
 
 
-            //draw the tetromino
+            // Draw the tetromino
             player.tetromino.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value !== 0) {
-                        newStage[y + player.pos.y, x + player.pos.x] = [
+                        newStage[y + player.pos.y][x + player.pos.x] = [
                             value,
                             `${player.collided ? 'merged' : 'clear'}`
                         ]
@@ -25,7 +25,8 @@ export function useStage(player, setPlayer) {
             })
             return newStage
         }
-        setStage((prevState => updateStage(prevState)))
-    }, [])
+        setStage(prev => updateStage(prev))
+    }, [player.x, player.y, player.tetromino, player.collided])
+
     return [stage, setStage]
 }
