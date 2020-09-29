@@ -19,7 +19,6 @@ export function useStage(player, setPlayer) {
                         newStage[y + player.pos.y, x + player.pos.x] = [
                             value,
                             `${player.collided ? 'merged' : 'clear'}`
-
                         ]
                     }
                 })
