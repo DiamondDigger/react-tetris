@@ -11,19 +11,34 @@ export function useStage(player, setPlayer) {
             const newStage = prevStage => prevStage.map(row =>
                 row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)))
             console.log('prev stage', prevStage)
-            console.log('player', player.tetromino)
+            console.log('tetromino of player', player.tetromino)
 
             // Draw the tetromino
-            for (const row of player) {
+
+            //LOGGING
+            //going through the tetromino
+            let i = 0
+            let j = 0
+            for (const row of player.tetromino) {
+                ++i
                 for (const value of row) {
-                    console.log('val', value)
+                    j > 2 ? j = 1 : ++j
+                    console.log(`__val__${i}${j}`, value)
                 }
             }
+
+            //player.pos
+            console.log('player.pos.x: ', player.pos.x)
+            console.log('player.pos.y: ', player.pos.y)
+
+
             player.tetromino.forEach((row, y) => {
+                console.log('y:', y)
                 row.forEach((value, x) => {
+                    console.log('value of x: ', `${value} of ${x}`)
                     if (value !== 0) {
-                            newStage[y + player.pos.y][x + player.pos.x] = [
-                                value,
+                        newStage[y + player.pos.y][x + player.pos.x] = [
+                            value,
                             `${player.collided ? 'merged' : 'clear'}`
                         ]
                     }
@@ -33,7 +48,7 @@ export function useStage(player, setPlayer) {
             return newStage
         }
         setStage(prev => updateStage(prev))
-    }, [player.x, player.y, player.tetromino, player.collided])
+    }, [player.pos.x, player.pos.y, player.tetromino, player.collided])
 
     return [stage, setStage]
 }
