@@ -12,6 +12,9 @@ export function useStage(player, setPlayer) {
                 row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)))
             console.log('prev stage', prevStage)
             console.log('tetromino of player', player.tetromino)
+            console.log('prevStage[1][1]', prevStage[1][1])
+            console.log('prevStage[1][1][0]', prevStage[1][1][0])
+            console.log('prevStage[1][1][1]', prevStage[1][1][1])
 
             // Draw the tetromino
 
@@ -37,8 +40,8 @@ export function useStage(player, setPlayer) {
                 row.forEach((value, x) => {
                     console.log('value of x: ', `${value} of ${x}`)
                     if (value !== 0) {
-                        newStage[y + player.pos.y][x + player.pos.x] = [
-                            value,
+                        console.log(newStage())
+                        newStage[y + player.pos.y][x + player.pos.x] = [value,
                             `${player.collided ? 'merged' : 'clear'}`
                         ]
                     }
