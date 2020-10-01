@@ -31,13 +31,13 @@ function Tetris() {
 
     const move = ({keyCode}) => {
         if (!gameOver) {
-            if (keyCode === '37') { // left arrow
+                if (keyCode === 37) { // left arrow
                 movePlayer(-1)
             }
-            if (keyCode === '39') { // right arrow
+            if (keyCode === 39) { // right arrow
                 movePlayer(1)
             }
-            if (keyCode === '40') { // down
+            if (keyCode === 40) { // down
                 dropPlayer()
             }
         }
