@@ -57,7 +57,7 @@ function Tetris() {
 
     console.log('re-render')
     return (
-        <StyledTetrisWrapper role="button" tabIndex='0' onKeyDown={e => move(e)}>
+        <StyledTetrisWrapper role='button' tabIndex='0' onKeyDown={e => move(e)}>
             <StyledTetris>
                 <Stage stage={stage}/>
                 <aside>
