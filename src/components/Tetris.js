@@ -18,7 +18,7 @@ import {createTetromino} from "../tetrominos";
 
 function Tetris() {
     const [dropTime, setDropTime] = useState(null);
-    const [gameOver, setGameOver] = useState(true)
+    const [gameOver, setGameOver] = useState(false)
 
     const [player, updatePlayerPos, resetPlayer] = usePlayer()
     const [stage, setStage] = useStage(player)
@@ -57,7 +57,7 @@ function Tetris() {
 
     console.log('re-render')
     return (
-        <StyledTetrisWrapper role='button' onKeyDown={e => move(e)}>
+        <StyledTetrisWrapper role="button" tabIndex='0' onKeyDown={e => move(e)}>
             <StyledTetris>
                 <Stage stage={stage}/>
                 <aside>
@@ -73,7 +73,7 @@ function Tetris() {
                             </div>
                         )
                     }
-                    <StartButton onClick={startGame}/>
+                    <StartButton callback={startGame}/>
                 </aside>
             </StyledTetris>
         </StyledTetrisWrapper>
