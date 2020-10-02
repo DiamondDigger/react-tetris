@@ -32,7 +32,6 @@ export const TETROMINOS = {
         shape: [
             ['Z', 'Z', 0],
             [0, 'Z', 'Z'],
-            [0, 0, 0],
         ],
         color: '132, 252, 3'
     },
@@ -40,14 +39,12 @@ export const TETROMINOS = {
         shape: [
             [0, 'S', 'S'],
             ['S', 'S', 0],
-            [0, 0, 0],
         ],
         color: '240, 252, 3'
     },
     T: {
         shape: [
             ['T', 'T', 'T'],
-            [0, 'T', 0],
             [0, 'T', 0],
         ],
         color: '252, 186, 3'

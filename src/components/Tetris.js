@@ -13,7 +13,7 @@ import {StyledTetrisWrapper, StyledTetris} from './styles/StyledTetris'
 //Hooks
 import {useStage} from '../hooks/useStage'
 import {usePlayer} from "../hooks/usePlayer";
-import {createStage} from "../gameHelpers";
+import {createStage, checkCollision} from "../gameHelpers";
 import {createTetromino} from "../tetrominos";
 
 function Tetris() {
@@ -27,11 +27,12 @@ function Tetris() {
         //reset everything
         setStage(createStage())
         resetPlayer()
+        setGameOver(false)
     }
 
     const move = ({keyCode}) => {
         if (!gameOver) {
-                if (keyCode === 37) { // left arrow
+            if (keyCode === 37) { // left arrow
                 movePlayer(-1)
             }
             if (keyCode === 39) { // right arrow
@@ -44,7 +45,15 @@ function Tetris() {
     }
 
     const drop = () => {
-        updatePlayerPos({x: 0, y: 1, collided: false})
+        if (!checkCollision(stage, player, {x: 0, y: 1})) {
+            updatePlayerPos({x: 0, y: 1, collided: false});
+        } else {
+            if (player.pos.y < 1) {
+                console.log('Game Over')
+                setGameOver(true)
+            }
+            updatePlayerPos({x: 0, y: 0, collided: true});
+        }
     }
 
     const dropPlayer = () => {
@@ -52,7 +61,10 @@ function Tetris() {
     }
 
     const movePlayer = (direction) => {
-        updatePlayerPos({x: direction, y: 0})
+        if (!checkCollision(stage, player, {x: direction, y: 0})){
+            updatePlayerPos({x: direction, y: 0})
+        }
+        // updatePlayerPos({x: direction, y: 0})
     }
 
     console.log('re-render')

@@ -16,11 +16,12 @@ export const checkCollision = (stage, player, {x: moveX, y: moveY}) => {
                     //2. check that we are not go outside of the stage in vertical dimension  (y)
                     !stage[y + player.pos.y + moveY] ||
                     //3. check that we are not go outside of the stage in horizontal dimension (x)
-                    !stage[y + player.tetromino[y] + moveY][x + player.tetromino[y][x] + moveX] ||
+                    !stage[y + player.pos.y + moveY][x + player.pos.x + moveX] ||
                     //4. check the value of the next cell( in which we move to) - 'clear' or not
-                    stage[y + player.tetromino[y] + moveY][x + player.tetromino[y][x]][1] !== 'clear'
-                )
-                    return false
+                    stage[y + player.pos.y + moveY][x + player.pos.x + moveX][1] !== 'clear'
+                ) {
+                    return true
+                }
             }
         }
     }

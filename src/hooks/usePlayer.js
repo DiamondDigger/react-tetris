@@ -27,5 +27,7 @@ export function usePlayer() {
             collided: false
         })
     }, [])
+
+
     return [player, updatePlayerPos, resetPlayer]
 }
