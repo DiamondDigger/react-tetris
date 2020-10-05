@@ -3,7 +3,6 @@ import '../index.css'
 
 //Components
 import Stage from './Stage'
-import Cell from './Cell'
 import Display from './Display'
 import StartButton from './StartButton'
 
@@ -14,20 +13,26 @@ import {StyledTetrisWrapper, StyledTetris} from './styles/StyledTetris'
 import {useStage} from '../hooks/useStage'
 import {usePlayer} from "../hooks/usePlayer";
 import {createStage, checkCollision} from "../gameHelpers";
-import {createTetromino} from "../tetrominos";
 
 function Tetris() {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false)
 
     const [player, updatePlayerPos, resetPlayer] = usePlayer()
-    const [stage, setStage] = useStage(player)
+    const [stage, setStage] = useStage(player,resetPlayer)
 
     const startGame = () => {
         //reset everything
         setStage(createStage())
         resetPlayer()
         setGameOver(false)
+    }
+
+    const movePlayer = (direction) => {
+        if (!checkCollision(stage, player, {x: direction, y: 0})){
+            updatePlayerPos({x: direction, y: 0})
+        }
+        // updatePlayerPos({x: direction, y: 0})
     }
 
     const move = ({keyCode}) => {
@@ -60,14 +65,7 @@ function Tetris() {
         drop()
     }
 
-    const movePlayer = (direction) => {
-        if (!checkCollision(stage, player, {x: direction, y: 0})){
-            updatePlayerPos({x: direction, y: 0})
-        }
-        // updatePlayerPos({x: direction, y: 0})
-    }
-
-    console.log('re-render')
+    console.log('re-render', stage)
     return (
         <StyledTetrisWrapper role='button' tabIndex='0' onKeyDown={e => move(e)}>
             <StyledTetris>

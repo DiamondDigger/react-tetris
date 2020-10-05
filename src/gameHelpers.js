@@ -1,5 +1,5 @@
 export const STAGE_HEIGHT = 20
-export const STAGE_WIDTH = 10
+export const STAGE_WIDTH = 12
 
 export function createStage() {
     return Array.from(Array(STAGE_HEIGHT), () =>
@@ -20,6 +20,7 @@ export const checkCollision = (stage, player, {x: moveX, y: moveY}) => {
                     //4. check the value of the next cell( in which we move to) - 'clear' or not
                     stage[y + player.pos.y + moveY][x + player.pos.x + moveX][1] !== 'clear'
                 ) {
+                    console.log('player collided!', player.pos.y, player.pos.x)
                     return true
                 }
             }

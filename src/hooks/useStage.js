@@ -15,7 +15,8 @@ export function useStage(player, resetPlayer) {
             player.tetromino.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value !== 0) {
-                        newStage[y + player.pos.y][x + player.pos.x] = [value,
+                        newStage[y + player.pos.y][x + player.pos.x] = [
+                            value,
                             `${player.collided ? 'merged' : 'clear'}`
                         ]
                     }
@@ -29,6 +30,7 @@ export function useStage(player, resetPlayer) {
 
             return newStage;
         }
+
         setStage(prev => updateStage(prev))
     }, [player, resetPlayer])
 

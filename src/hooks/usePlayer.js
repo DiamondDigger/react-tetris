@@ -18,6 +18,7 @@ export function usePlayer() {
             pos: {x: (prev.pos.x += x), y: (prev.pos.y += y)},
             collided
         }))
+        console.log('updated the player')
     }
 
     const resetPlayer = useCallback(() => {
@@ -26,6 +27,7 @@ export function usePlayer() {
             tetromino: createTetromino().shape,
             collided: false
         })
+        console.log('the player has been reset')
     }, [])
 
 
