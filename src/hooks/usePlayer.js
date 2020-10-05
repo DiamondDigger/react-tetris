@@ -12,6 +12,18 @@ export function usePlayer() {
 
     console.log('player have been created', player.tetromino)
 
+    const rotate = (matrix, dir) => {
+        //1. change rows and columns among each other
+        //2. reverse elems in the row and make it in a circle spin
+
+        return 'stumb'
+    }
+
+    const rotatePlayer = (stage, dir) => {
+        //1. check if we can rotate (about borders of the stage)
+    }
+
+
     const updatePlayerPos = ({x, y, collided}) => {
         setPlayer(prev => ({
             ...prev,
