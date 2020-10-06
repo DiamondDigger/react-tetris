@@ -18,16 +18,15 @@ export function usePlayer() {
 
         if (dir > 0) {
             return rotatedTetro.map(row => row.reverse())
-        } else if (dir < 0) {
-            return rotatedTetro.reverse()
         }
+            return rotatedTetro.reverse()
     }
 
     const rotatePlayer = (stage, dir) => {
         //1. make a deep copy of tetromino (reliable for array of primitives)
         const deepCopyOfTetro = JSON.parse(JSON.stringify(player))
 
-        deepCopyOfTetro.tetromino = rotate(deepCopyOfTetro.tetromino)
+        deepCopyOfTetro.tetromino = rotate(deepCopyOfTetro.tetromino, dir)
 
         setPlayer(deepCopyOfTetro.tetromino)
 
