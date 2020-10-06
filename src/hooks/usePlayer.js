@@ -1,7 +1,7 @@
 import {useCallback, useState} from 'react'
 
 import {createTetromino, TETROMINOS} from '../tetrominos'
-import {STAGE_WIDTH} from "../gameHelpers";
+import {checkCollision, STAGE_WIDTH} from "../gameHelpers";
 
 export function usePlayer() {
     const [player, setPlayer] = useState({
@@ -17,11 +17,21 @@ export function usePlayer() {
         const deepCopyOfTetro = JSON.parse(JSON.stringify(matrix))
 
         //2. change rows and columns among each other
-        const rotatedTetro = deepCopyOfTetro.map((_, column) => _.map(_ => _[column]))
-        return rotatedTetro
+        const rotatedTetro = matrix.map((_, indexOfRow) => deepCopyOfTetro.map(col => col[indexOfRow]))
+
+        if (dir > 0) {
+            return rotatedTetro.map(row => row.reverse())
+        } else if (dir < 0) {
+            return rotatedTetro.reverse()
+        }
     }
 
     const rotatePlayer = (stage, dir) => {
+        const stepPlusOneCell = 1
+        const tetrominoX = player.pos.x
+        checkCollision(stage, player, {x: stepPlusOneCell, y:0})
+        checkCollision(stage, player, {x: -stepPlusOneCell, y:0})
+        checkCollision(stage, player, {x: 0, y:1})
         //1. check if we can rotate (about borders of the stage)
     }
 
