@@ -13,10 +13,12 @@ export function usePlayer() {
     console.log('player have been created', player.tetromino)
 
     const rotate = (matrix, dir) => {
-        //1. change rows and columns among each other
-        //2. reverse elems in the row and make it in a circle spin
+        //1. make a deep copy of tetromino
+        const deepCopyOfTetro = JSON.parse(JSON.stringify(matrix))
 
-        return 'stumb'
+        //2. change rows and columns among each other
+        const rotatedTetro = deepCopyOfTetro.map((_, column) => _.map(_ => _[column]))
+        return rotatedTetro
     }
 
     const rotatePlayer = (stage, dir) => {
