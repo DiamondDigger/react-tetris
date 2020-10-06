@@ -19,7 +19,7 @@ export function usePlayer() {
         if (dir > 0) {
             return rotatedTetro.map(row => row.reverse())
         }
-            return rotatedTetro.reverse()
+        return rotatedTetro.reverse()
     }
 
     const rotatePlayer = (stage, dir) => {
@@ -28,14 +28,14 @@ export function usePlayer() {
 
         deepCopyOfTetro.tetromino = rotate(deepCopyOfTetro.tetromino, dir)
 
-        setPlayer(deepCopyOfTetro.tetromino)
+        setPlayer(deepCopyOfTetro)
 
 
-        const stepPlusOneCell = 1
-        const tetrominoX = player.pos.x
-        checkCollision(stage, player, {x: stepPlusOneCell, y:0})
-        checkCollision(stage, player, {x: -stepPlusOneCell, y:0})
-        checkCollision(stage, player, {x: 0, y:1})
+        // const stepPlusOneCell = 1
+        // const tetrominoX = player.pos.x
+        // checkCollision(stage, player, {x: stepPlusOneCell, y:0})
+        // checkCollision(stage, player, {x: -stepPlusOneCell, y:0})
+        // checkCollision(stage, player, {x: 0, y:1})
         //1. check if we can rotate (about borders of the stage)
     }
 
@@ -59,5 +59,5 @@ export function usePlayer() {
     }, [])
 
 
-    return [player, updatePlayerPos, resetPlayer]
+    return [player, updatePlayerPos, resetPlayer, rotatePlayer]
 }

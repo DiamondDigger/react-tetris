@@ -54,7 +54,7 @@ export const TETROMINOS = {
             ['O', 'O'],
             ['O', 'O']
         ],
-        color: '141, 167, 199   '
+        color: '141, 167, 199'
     }
 }
 
