@@ -13,11 +13,8 @@ export function usePlayer() {
     console.log('player have been created', player.tetromino)
 
     const rotate = (matrix, dir) => {
-        //1. make a deep copy of tetromino
-        const deepCopyOfTetro = JSON.parse(JSON.stringify(matrix))
-
-        //2. change rows and columns among each other
-        const rotatedTetro = matrix.map((_, indexOfRow) => deepCopyOfTetro.map(col => col[indexOfRow]))
+        //1. change rows and columns among each other
+        const rotatedTetro = matrix.map((_, indexOfRow) => matrix.map(col => col[indexOfRow]))
 
         if (dir > 0) {
             return rotatedTetro.map(row => row.reverse())
@@ -27,6 +24,14 @@ export function usePlayer() {
     }
 
     const rotatePlayer = (stage, dir) => {
+        //1. make a deep copy of tetromino (reliable for array of primitives)
+        const deepCopyOfTetro = JSON.parse(JSON.stringify(player))
+
+        deepCopyOfTetro.tetromino = rotate(deepCopyOfTetro.tetromino)
+
+        setPlayer(deepCopyOfTetro.tetromino)
+
+
         const stepPlusOneCell = 1
         const tetrominoX = player.pos.x
         checkCollision(stage, player, {x: stepPlusOneCell, y:0})
