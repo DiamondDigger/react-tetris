@@ -2,6 +2,7 @@ import {useCallback, useState} from 'react'
 
 import {createTetromino, TETROMINOS} from '../tetrominos'
 import {checkCollision, STAGE_WIDTH} from "../gameHelpers";
+import {renderIntoDocument} from "react-dom/test-utils";
 
 export function usePlayer() {
     const [player, setPlayer] = useState({
@@ -15,6 +16,7 @@ export function usePlayer() {
     const rotate = (matrix, dir) => {
         //1. change rows and columns among each other
         const rotatedTetro = matrix.map((_, indexOfRow) => matrix.map(col => col[indexOfRow]))
+        
         // let temp
         // for (let i = 0; i < matrix.length; i++) {
         //     for (let j = 0; j < i; j++) {
@@ -32,19 +34,20 @@ export function usePlayer() {
 
     const rotatePlayer = (stage, dir) => {
         //1. make a deep copy of tetromino (reliable for array of primitives)
-        const deepCopyOfTetro = JSON.parse(JSON.stringify(player))
+        const deepCopyOfPlayer = JSON.parse(JSON.stringify(player))
 
-        deepCopyOfTetro.tetromino = rotate(deepCopyOfTetro.tetromino, dir)
+        deepCopyOfPlayer.tetromino = rotate(deepCopyOfPlayer.tetromino, dir)
+        
+        //2. check if we can rotate (about borders of the stage)
+        
+        const posX = deepCopyOfPlayer.pos.x
+        let offset = 1
+        while (checkCollision(stage, deepCopyOfPlayer, {x: 0, y: 0})) {
+            deepCopyOfPlayer.pos.x += offset
+            offset = -(offset + (offset > 0 ? 1 : -1))
+        }
 
-        setPlayer(deepCopyOfTetro)
-
-
-        // const stepPlusOneCell = 1
-        // const tetrominoX = player.pos.x
-        // checkCollision(stage, player, {x: stepPlusOneCell, y:0})
-        // checkCollision(stage, player, {x: -stepPlusOneCell, y:0})
-        // checkCollision(stage, player, {x: 0, y:1})
-        //1. check if we can rotate (about borders of the stage)
+        setPlayer(deepCopyOfPlayer)
     }
 
 
