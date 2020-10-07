@@ -4,17 +4,25 @@ import {createStage} from "../gameHelpers";
 
 export function useStage(player, resetPlayer) {
     const [stage, setStage] = useState(createStage());
-    //1. add another state for the sweet row
+    const [rowsCleared, setRowsCleared] = useState(0)
 
     useEffect(() => {
+        setRowsCleared(0)
+        const sweepRows = newStage =>
+             newStage.reduce((ack, row) => {
+                if (row.findIndex(cell => cell[0] === 0) === -1) {
+                    setRowsCleared(prev => prev + 1)
+                    ack.unshift(new Array(newStage[0].length).fill([0, 'clear']))
+                    return ack
+                }
+                ack.push(row)
+                return ack
+            }, [])
+
         const updateStage = prevStage => {
             // First flush the stage
             const newStage = prevStage.map(row =>
                 row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)))
-
-            //2. check if the row is full
-            //3. flush it with .reduce of the newStage
-            //4. call the function when you check player collided option
 
             // Then draw the tetromino
             player.tetromino.forEach((row, y) => {
@@ -26,11 +34,12 @@ export function useStage(player, resetPlayer) {
                         ]
                     }
                 })
-            })
+            });
 
             // Check the player
             if (player.collided) {
                 resetPlayer()
+                return sweepRows(newStage)
             }
 
             return newStage;
