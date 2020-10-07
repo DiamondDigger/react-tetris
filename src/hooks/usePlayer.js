@@ -15,9 +15,17 @@ export function usePlayer() {
     const rotate = (matrix, dir) => {
         //1. change rows and columns among each other
         const rotatedTetro = matrix.map((_, indexOfRow) => matrix.map(col => col[indexOfRow]))
+        // let temp
+        // for (let i = 0; i < matrix.length; i++) {
+        //     for (let j = 0; j < i; j++) {
+        //         temp = matrix[i][j]
+        //         matrix[i][j] = matrix [j][i]
+        //         matrix[j][i] = temp
+        //     }
+        // }
 
         if (dir > 0) {
-            return rotatedTetro.map(row => row.reverse())
+            return rotatedTetro.map(row => row.reverse());
         }
         return rotatedTetro.reverse()
     }
