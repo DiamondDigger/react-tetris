@@ -16,7 +16,7 @@ export function usePlayer() {
     const rotate = (matrix, dir) => {
         //1. change rows and columns among each other
         const rotatedTetro = matrix.map((_, indexOfRow) => matrix.map(col => col[indexOfRow]))
-        
+
         // let temp
         // for (let i = 0; i < matrix.length; i++) {
         //     for (let j = 0; j < i; j++) {
@@ -36,15 +36,23 @@ export function usePlayer() {
         //1. make a deep copy of tetromino (reliable for array of primitives)
         const deepCopyOfPlayer = JSON.parse(JSON.stringify(player))
 
+        //2. make rotation
         deepCopyOfPlayer.tetromino = rotate(deepCopyOfPlayer.tetromino, dir)
-        
-        //2. check if we can rotate (about borders of the stage)
-        
+
+        //3. check if we collided and move to another position to avoid collision
+        // or abort and return back
         const posX = deepCopyOfPlayer.pos.x
         let offset = 1
+        //while we have a collision we move to the one side or another(on the offset distance)
         while (checkCollision(stage, deepCopyOfPlayer, {x: 0, y: 0})) {
             deepCopyOfPlayer.pos.x += offset
             offset = -(offset + (offset > 0 ? 1 : -1))
+            //if offset is to big it's senseless and we rotate back (-dir) and abort
+            if (offset > deepCopyOfPlayer.tetromino[0].length) {
+                rotate(deepCopyOfPlayer, -dir)
+                deepCopyOfPlayer.pos.x = posX
+                return
+            }
         }
 
         setPlayer(deepCopyOfPlayer)
