@@ -33,7 +33,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### startGame stage
 <img src='img/startGameStage.png'>
 
-### befor removing full row
+### before removing full row
 <img src='img/removingFullRows.png'>
 
 ### after removing full row
