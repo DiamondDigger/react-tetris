@@ -2,7 +2,6 @@ import {useCallback, useState} from 'react'
 
 import {createTetromino, TETROMINOS} from '../tetrominos'
 import {checkCollision, STAGE_WIDTH} from "../gameHelpers";
-import {renderIntoDocument} from "react-dom/test-utils";
 
 export function usePlayer() {
     const [player, setPlayer] = useState({

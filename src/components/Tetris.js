@@ -14,13 +14,17 @@ import {useStage} from '../hooks/useStage'
 import {usePlayer} from "../hooks/usePlayer";
 import {createStage, checkCollision} from "../gameHelpers";
 import {useInterval} from "../hooks/useInterval";
+import {useGameStatus} from '../hooks/useGameStatus'
 
 function Tetris() {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false)
 
     const [player, updatePlayerPos, resetPlayer, rotatePlayer] = usePlayer()
-    const [stage, setStage] = useStage(player,resetPlayer)
+    const [stage, setStage, rowsCleared] = useStage(player,resetPlayer)
+    const [score, setScore, level, setLevel, rows, setRows] = useGameStatus(rowsCleared)
+
+    const formulaOfSpeed = 1000 / (level + 1) + 200
 
     const startGame = () => {
         //reset everything
@@ -28,6 +32,9 @@ function Tetris() {
         resetPlayer()
         setGameOver(false)
         setDropTime(1000)
+        setRows(0)
+        setLevel(0)
+        setScore(0)
     }
 
     const movePlayer = (direction) => {
@@ -54,12 +61,20 @@ function Tetris() {
     }
 
     const drop = () => {
+        // increase level when player has cleared 10 rows
+        if (rows > (level + 1) * 10 ){
+            setLevel(prev => prev + 1)
+            // increase time
+            setDropTime(formulaOfSpeed)
+        }
+
         if (!checkCollision(stage, player, {x: 0, y: 1})) {
             updatePlayerPos({x: 0, y: 1, collided: false});
         } else {
             if (player.pos.y < 1) {
                 console.log('Game Over')
                 setGameOver(true)
+                setDropTime(null)
             }
             updatePlayerPos({x: 0, y: 0, collided: true});
         }
@@ -79,7 +94,7 @@ function Tetris() {
     const keyUp = ({keyCode}) => {
         if (!gameOver) {
             if (keyCode === 40) {
-                setDropTime(1000)
+                setDropTime(formulaOfSpeed)
                 console.log('interval up')
             }
         }
@@ -98,9 +113,9 @@ function Tetris() {
                         )
                         : (
                             <div>
-                                <Display text='Score'/>
-                                <Display text='Rows'/>
-                                <Display text='Level'/>
+                                <Display text={`Score: ${score}`}/>
+                                <Display text={`Rows: ${rows}`}/>
+                                <Display text={`Level: ${level}`}/>
                             </div>
                         )
                     }

@@ -13,6 +13,7 @@ export const useGameStatus = rowsCleared => {
             //the formula from the original tetris
             setScore(prev => prev + linePoints[rowsCleared-1] * (level + 1))
             setRows(prev => prev + rowsCleared)
+            console.log('row =', rows)
         }
     }, [level, linePoints, rowsCleared])
 
