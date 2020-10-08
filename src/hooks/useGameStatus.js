@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 
 export const useGameStatus = rowsCleared => {
     const [score, setScore] = useState(0)
@@ -8,13 +8,17 @@ export const useGameStatus = rowsCleared => {
     //points for 1, 2, 3, 4 cleared rows
     const linePoints = [40, 100, 300, 1200]
 
-    const calc = useCallback(() => {
+    const calcScore = useCallback(() => {
         if (rowsCleared > 0) {
             //the formula from the original tetris
             setScore(prev => prev + linePoints[rowsCleared-1] * (level + 1))
             setRows(prev => prev + rowsCleared)
         }
-    }, [level, rowsCleared])
+    }, [level, linePoints, rowsCleared])
 
+    useEffect(()=>{
+        calcScore()
+    }, [calcScore, score, rowsCleared])
 
+    return [score, setScore, rows, setRows, level, setLevel]
 }
