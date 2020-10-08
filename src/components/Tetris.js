@@ -16,6 +16,8 @@ import {createStage, checkCollision} from "../gameHelpers";
 import {useInterval} from "../hooks/useInterval";
 import {useGameStatus} from '../hooks/useGameStatus'
 
+let gameOn = false
+
 function Tetris() {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false)
@@ -35,6 +37,17 @@ function Tetris() {
         setRows(0)
         setLevel(0)
         setScore(0)
+        gameOn = true
+    }
+
+    const pauseGame = () => {
+       gameOn = !gameOver && gameOn
+           ? (setDropTime(null),
+           console.log('pause ON'),
+           !gameOn)
+           : (setDropTime(formulaOfSpeed),
+           console.log('pause OFF'),
+           !gameOn)
     }
 
     const movePlayer = (direction) => {
@@ -101,7 +114,7 @@ function Tetris() {
     }
 
 
-    console.log('re-render')
+    console.log('re-render', gameOn)
     return (
         <StyledTetrisWrapper role='button' tabIndex='0' onKeyDown={e => move(e)} onKeyUp={keyUp}>
             <StyledTetris>
@@ -119,7 +132,8 @@ function Tetris() {
                             </div>
                         )
                     }
-                    <StartButton callback={startGame}/>
+                    <StartButton callback={startGame} value='Start Game'/>
+                    <StartButton callback={pauseGame} value='Pause Game'/>
                 </aside>
             </StyledTetris>
         </StyledTetrisWrapper>

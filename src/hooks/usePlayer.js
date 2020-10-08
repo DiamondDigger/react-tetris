@@ -10,8 +10,6 @@ export function usePlayer() {
         collided: false
     })
 
-    console.log('player have been created', player.tetromino)
-
     const rotate = (matrix, dir) => {
         // change rows and columns among each other
         const rotatedTetro = matrix.map((_, indexOfRow) => matrix.map(col => col[indexOfRow]))
@@ -48,7 +46,6 @@ export function usePlayer() {
         setPlayer(deepCopyOfPlayer)
     }
 
-
     const updatePlayerPos = ({x, y, collided}) => {
         setPlayer(prev => ({
             ...prev,
@@ -64,7 +61,6 @@ export function usePlayer() {
             collided: false
         })
     }, [])
-
 
     return [player, updatePlayerPos, resetPlayer, rotatePlayer]
 }
