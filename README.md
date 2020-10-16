@@ -38,3 +38,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### after removing full row
 <img src='img/withoutFullRows.png'>
+
+### schema
+<img src='img/schema.png'>
