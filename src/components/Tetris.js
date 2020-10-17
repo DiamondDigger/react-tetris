@@ -74,12 +74,13 @@ function Tetris() {
     }
 
     const drop = () => {
-        // increase level when player has cleared 10 rows
-        if (rows > ((level + 1) * 10 )){
-            setLevel(prev => prev + 1)
-            // increase time
-            setDropTime(formulaOfSpeed)
-        }
+        // // increase level when player has cleared 10 rows
+        // if (rows > ((level + 1) * 10 )){
+        //     console.log('rows from drop:', rows, '-', level)
+        //     // setLevel(prev => prev + 1)
+        //     // increase time
+        //     setDropTime(formulaOfSpeed)
+        // }
 
         if (!checkCollision(stage, player, {x: 0, y: 1})) {
             updatePlayerPos({x: 0, y: 1, collided: false});
@@ -115,6 +116,9 @@ function Tetris() {
 
 
     console.log('re-render', gameOn)
+    console.log('rows: ', rows)
+    console.log('level: ', level)
+    console.log('score: ', score)
     return (
         <StyledTetrisWrapper role='button' tabIndex='0' onKeyDown={e => move(e)} onKeyUp={keyUp}>
             <StyledTetris>
