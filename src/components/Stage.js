@@ -1,15 +1,21 @@
 import React from "react";
 
-import {StyledStage} from './styles/StyledStage'
+import { StyledStage, BottomStage } from "./styles/StyledStage";
 
-import Cell from './Cell'
+import Cell from "./Cell";
+import ControlButtons from "./ControlButtons";
 
-function Stage({stage}) {
-    return (
-        <StyledStage width={stage[0].length} height={stage.length}>
-            {stage.map((row)=> row.map((cell,x)=> <Cell key={x} type={cell[0]} />))}
-        </StyledStage>
-    )
+function Stage({ stage }) {
+  return (
+    <StyledStage width={stage[0].length} height={stage.length}>
+      {stage.map((row) =>
+        row.map((cell, x) => <Cell key={x} type={cell[0]} />)
+      )}
+      <BottomStage>
+        <ControlButtons />
+      </BottomStage>
+    </StyledStage>
+  );
 }
 
-export default Stage
+export default Stage;
