@@ -20,22 +20,26 @@ export const Up = styled.button`
   opacity: 0.3;
   grid-column: 2;
   grid-row: 1;
+  font-size: 0.7rem;
 `;
 
 export const Down = styled.button`
   opacity: 0.3;
   grid-column: 2;
   grid-row: 3;
+  font-size: 0.7rem;
 `;
 
 export const Left = styled.button`
   opacity: 0.3;
   grid-column: 1;
   grid-row: 2;
+  font-size: 0.7rem;
 `;
 
 export const Right = styled.button`
   grid-column: 3;
   grid-row: 2;
   opacity: 0.3;
+  font-size: 0.7rem;
 `;

@@ -7,7 +7,11 @@ import Display from "./Display";
 import StartButton from "./StartButton";
 
 //Styled Components
-import { StyledTetrisWrapper, StyledTetris } from "./styles/StyledTetris";
+import {
+  StyledTetrisWrapper,
+  StyledTetris,
+  TetrisBox,
+} from "./styles/StyledTetris";
 
 //Hooks
 import { useStage } from "../hooks/useStage";
@@ -129,23 +133,25 @@ function Tetris() {
       onKeyDown={(e) => move(e)}
       onKeyUp={keyUp}
     >
-      <StyledTetris>
-        <Stage stage={stage} />
-        {/* <ControlButtons /> */}
-        <aside>
-          {gameOver ? (
-            <Display gameOver={gameOver} text="Game Over dude" />
-          ) : (
-            <div>
-              <Display text={`Score: ${score}`} />
-              <Display text={`Rows: ${rows}`} />
-              <Display text={`Level: ${level}`} />
-            </div>
-          )}
-          <StartButton callback={startGame} value="Start Game" />
-          <StartButton callback={pauseGame} value="Pause Game" />
-        </aside>
-      </StyledTetris>
+      <TetrisBox>
+        <StyledTetris>
+          <Stage stage={stage} />
+          {/* <ControlButtons /> */}
+          <aside>
+            {gameOver ? (
+              <Display gameOver={gameOver} text="Game Over dude" />
+            ) : (
+              <div>
+                <Display text={`Score: ${score}`} />
+                <Display text={`Rows: ${rows}`} />
+                <Display text={`Level: ${level}`} />
+              </div>
+            )}
+            <StartButton callback={startGame} value="Start Game" />
+            <StartButton callback={pauseGame} value="Pause Game" />
+          </aside>
+        </StyledTetris>
+      </TetrisBox>
     </StyledTetrisWrapper>
   );
 }
