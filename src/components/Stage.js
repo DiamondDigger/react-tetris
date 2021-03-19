@@ -5,7 +5,10 @@ import { StyledStage, BottomStage } from "./styles/StyledStage";
 import Cell from "./Cell";
 import ControlButtons from "./ControlButtons";
 
-function Stage({ stage }) {
+function Stage({ stage, gameOver }) {
+  if (gameOver) {
+    return null;
+  }
   return (
     <StyledStage width={stage[0].length} height={stage.length}>
       {stage.map((row) =>

@@ -3,18 +3,18 @@ import styled from "styled-components";
 import background from "../../img/background.png";
 
 export const StyledTetrisWrapper = styled.div`
-  /* width: 100vw; */
-  /* height: 100vh; */
-  /* background: url(${background}) #000; */
+  width: 100vw;
+  height: 100vh;
+  background: url(${background}) #000;
   background-size: cover;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 export const StyledTetris = styled.div`
   display: flex;
   align-items: center;
   padding: 40 px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
   max-width: 900px;
 
   aside {
@@ -26,5 +26,5 @@ export const StyledTetris = styled.div`
 `;
 
 export const TetrisBox = styled.div`
-  background-color: aqua;
+  /* background-color: aqua; */
 `;

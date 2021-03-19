@@ -19,6 +19,7 @@ import { usePlayer } from "../hooks/usePlayer";
 import { createStage, checkCollision } from "../gameHelpers";
 import { useInterval } from "../hooks/useInterval";
 import { useGameStatus } from "../hooks/useGameStatus";
+import LeaderBoard from "./LeaderBoard";
 
 let gameOn = false;
 
@@ -88,7 +89,7 @@ function Tetris() {
       setDropTime(formulaOfSpeed);
     }
     if (rows < level) {
-      console.log("rows < level******************");
+      // console.log("rows < level******************");
     }
 
     if (!checkCollision(stage, player, { x: 0, y: 1 })) {
@@ -122,10 +123,6 @@ function Tetris() {
     }
   };
 
-  console.log("re-render", gameOn);
-  console.log("rows: ", rows);
-  console.log("level: ", level);
-  console.log("score: ", score);
   return (
     <StyledTetrisWrapper
       role="button"
@@ -135,8 +132,9 @@ function Tetris() {
     >
       <TetrisBox>
         <StyledTetris>
-          <Stage stage={stage} />
+          <Stage stage={stage} gameOver={gameOver} />
           {/* <ControlButtons /> */}
+          <LeaderBoard score={score} showLeaderBoard={gameOver} />
           <aside>
             {gameOver ? (
               <Display gameOver={gameOver} text="Game Over dude" />
