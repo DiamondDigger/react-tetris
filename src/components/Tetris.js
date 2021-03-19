@@ -3,6 +3,7 @@ import "../index.css";
 
 //Components
 import Stage from "./Stage";
+import MiniStage from "./MiniStage";
 import Display from "./Display";
 import StartButton from "./StartButton";
 
@@ -16,10 +17,11 @@ import {
 //Hooks
 import { useStage } from "../hooks/useStage";
 import { usePlayer } from "../hooks/usePlayer";
-import { createStage, checkCollision } from "../gameHelpers";
+import { createStage, checkCollision, STAGE, MINI_STAGE } from "../gameHelpers";
 import { useInterval } from "../hooks/useInterval";
 import { useGameStatus } from "../hooks/useGameStatus";
 import LeaderBoard from "./LeaderBoard";
+import { usePreviewStage } from "../hooks/usePreviewStage";
 
 let gameOn = false;
 
@@ -29,6 +31,7 @@ function Tetris() {
 
   const [player, updatePlayerPos, resetPlayer, rotatePlayer] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
+  const [miniStage, setMiniStage] = usePreviewStage(player);
   const [score, setScore, level, setLevel, rows, setRows] = useGameStatus(
     rowsCleared
   );
@@ -37,7 +40,8 @@ function Tetris() {
 
   const startGame = () => {
     //reset everything
-    setStage(createStage());
+    setStage(createStage(STAGE));
+    setMiniStage(createStage(MINI_STAGE));
     resetPlayer();
     setGameOver(false);
     setDropTime(1000);
@@ -143,6 +147,7 @@ function Tetris() {
                 <Display text={`Score: ${score}`} />
                 <Display text={`Rows: ${rows}`} />
                 <Display text={`Level: ${level}`} />
+                <MiniStage miniStage={miniStage} />
               </div>
             )}
             <StartButton callback={startGame} value="Start Game" />

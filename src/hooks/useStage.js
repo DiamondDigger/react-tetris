@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { createStage } from "../gameHelpers";
+import { createStage, STAGE } from "../gameHelpers";
 
 export function useStage(player, resetPlayer) {
-  const [stage, setStage] = useState(createStage());
+  const [stage, setStage] = useState(createStage(STAGE));
   const [rowsCleared, setRowsCleared] = useState(0);
 
   useEffect(() => {
