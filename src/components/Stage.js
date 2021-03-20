@@ -5,7 +5,7 @@ import { StyledStage, BottomStage } from "./styles/StyledStage";
 import Cell from "./Cell";
 import ControlButtons from "./ControlButtons";
 
-function Stage({ stage, gameOver }) {
+function Stage({ stage, gameOver, movePlayer, dropPlayer, rotatePlayer }) {
   if (gameOver) {
     return null;
   }
@@ -14,9 +14,14 @@ function Stage({ stage, gameOver }) {
       {stage.map((row) =>
         row.map((cell, x) => <Cell key={x} type={cell[0]} />)
       )}
-      {/* <BottomStage>
-        <ControlButtons />
-      </BottomStage> */}
+      <BottomStage>
+        <ControlButtons
+          movePlayer={movePlayer}
+          dropPlayer={dropPlayer}
+          rotatePlayer={rotatePlayer}
+          stage={stage}
+        />
+      </BottomStage>
     </StyledStage>
   );
 }

@@ -21,6 +21,7 @@ import { createStage, checkCollision, STAGE, MINI_STAGE } from "../gameHelpers";
 import { useInterval } from "../hooks/useInterval";
 import { useGameStatus } from "../hooks/useGameStatus";
 import LeaderBoard from "./LeaderBoard";
+
 import { usePreviewStage } from "../hooks/usePreviewStage";
 
 let gameOn = false;
@@ -136,8 +137,13 @@ function Tetris() {
     >
       <TetrisBox>
         <StyledTetris>
-          <Stage stage={stage} gameOver={gameOver} />
-          {/* <ControlButtons /> */}
+          <Stage
+            stage={stage}
+            gameOver={gameOver}
+            movePlayer={movePlayer}
+            dropPlayer={dropPlayer}
+            rotatePlayer={rotatePlayer}
+          />
           <LeaderBoard score={score} showLeaderBoard={gameOver} />
           <aside>
             {gameOver ? (

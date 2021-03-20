@@ -14,23 +14,43 @@ import {
   Right,
 } from "./styles/StyledControllButtons";
 
-const ControlButtons = ({ width }) => {
+const ControlButtons = ({
+  width,
+  movePlayer,
+  dropPlayer,
+  rotatePlayer,
+  stage,
+}) => {
+  const handlePressRight = () => {
+    movePlayer(1);
+  };
+  const handlePressLeft = () => {
+    movePlayer(-1);
+  };
+
+  const handlePressDown = () => {
+    dropPlayer();
+  };
+  const handlePressUp = () => {
+    rotatePlayer(stage, 1);
+  };
+
   return (
     <ButtonsWrapper>
       <Up>
-        <UpArrowCircle />
+        <UpArrowCircle onClick={handlePressUp} />
         up
       </Up>
       <Down>
-        <DownArrowCircle />
+        <DownArrowCircle onClick={handlePressDown} />
         down
       </Down>
       <Left>
-        <LeftArrowCircle />
+        <LeftArrowCircle onClick={handlePressLeft} />
         left
       </Left>
       <Right>
-        <RightArrowCircle />
+        <RightArrowCircle onClick={handlePressRight} />
         right
       </Right>
     </ButtonsWrapper>
